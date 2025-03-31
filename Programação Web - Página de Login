@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: black;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400%;
+      height: 400%;
+      background: radial-gradient(white 2px, transparent 1px);
+      background-size: 200px 200px;
+      animation: movEstrelas 10s linear infinite, piscEstrelas 1.5s infinite alternate;
+      transform-origin: center;
+    }
+
+    body::after {
+      background-size: 300px 300px;
+      animation-duration: 12s, 1s;
+    }
+
+    @keyframes movEstrelas {
+      from {
+        transform: translate(-50%, -50%) scale(0.5);
+      }
+      to {
+        transform: translate(-50%, -50%) scale(3);
+      }
+    }
+
+    @keyframes piscEstrelas {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+
+    .quadroLogin {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      background: black;
+      width: 90%;
+      max-width: 300px;
+      z-index: 1;
+    }
+    .quadroLogin form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .formulario {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .formulario input {
+      padding: 15px 40px 15px 30px;
+      border-radius: 4px;
+      width: 100%;
+      border: none;
+      outline: none;
+    }
+    .formulario .fa {
+      position: absolute;
+      right: 15px;
+      color: gray;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    button {
+      padding: 15px;
+      border-radius: 4px;
+      font-size: 15px;
+      background: seagreen;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: mediumseagreen;
+    }
+    .linkSignup {
+      margin-top: 15px;
+      font-size: 15px;
+    }
+    .linkSignup a {
+      color: lightseagreen;
+    }
+    .quadroLogin h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 30px;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="quadroLogin">
+    <h2>Login</h2>
+    <form>
+        <div class="formulario">
+          <input type="text" placeholder="Usuário" required>
+          <i class="fa solid fa-user"></i>
+        </div>
+        <div class="formulario">
+          <input type="password" placeholder="Senha" required>
+          <i class="fa solid fa-key"></i>
+        </div>
+        <button>Entrar</button> 
+    </form>
+    <div class="linkSignup">
+      Não possui uma conta? <a href="signup.html">Cadastre-se</a>
+    </div>
+  </div>
+</body>
+</html>
