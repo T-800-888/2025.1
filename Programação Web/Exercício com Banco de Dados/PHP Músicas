@@ -1,0 +1,27 @@
+<?php
+$host = "localhost";
+$usuario = "root";
+$senha = "";
+$banco = "musica_preferida";
+
+$conn = new mysqli($host, $usuario, $senha, $banco);
+
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
+}
+
+$titulo = $_POST['titulo'];
+$duracao = $_POST['duracao'];
+$compositor = $_POST['compositor'];
+$album = $_POST['album'];
+$sql = "INSERT INTO musica (titulo, duracao, compositor, album)
+        VALUES ('$titulo', '$duracao', '$compositor', '$album')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "<h3 style='color:green;'>Música inserida com sucesso!</h3>";
+} else {
+    echo "<h3 style='color:red;'>Erro: " . $conn->error . "</h3>";
+}
+
+$conn->close();
+?>
