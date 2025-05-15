@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Duas Calculadoras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+      display: flex;
+      gap: 50px;
+    }
+    
+    .c2b .linha {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .c2b input[type="text"] {
+      padding: 10px;
+      background: #EEE;
+      border: 1px solid #CCC;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .c2b .operacao {
+      width: 37px;
+      height: 37px;
+      background-color: #FF8000;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .c2b .operacao:active {
+      background-color: #EE5000;
+    }
+
+    .c2b .resultado {
+      padding: 10px;
+      background: #EEE;
+      border: 1px solid #CCC;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .c2b .limpar {
+      width: 50px;
+      height: 37px;
+      padding: 10px;
+      background-color: #FF8000;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    .c2b .limpar:active {
+      background-color: #EE5000;
+    }
+
+    .c3 {
+      display: inline-block;
+      border: 5px solid grey;
+      background-color: #CCC;
+      padding: 10px;
+    }
+
+    .c3 input {
+      width: 230px;
+      font-size: 36px;
+      padding: 10px;
+      margin-bottom: 5px;
+      border: 1px solid gray;
+    }
+
+    .c3 .teclado {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .c3 .teclado button {
+      font-size: 20px;
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 10px;
+      border-width: 3px;
+      height: 50px;
+      width: 50px;
+    }
+
+    .c3 .numero { 
+      background: black;
+      color: white;
+    }
+
+    .c3 .operacao { 
+      background: darkred;
+      color: white;
+    }
+
+    .c3 .ca {
+      background: white;
+      color: black;
+    }
+
+    .c3 .teclado button:hover {
+      background-color: gray;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Calculadora 2b -->
+<div class="c2b">
+  <div class="linha">
+    <input type="text" id="x_1" size="3">
+    <input type="text" id="y_1" size="3">
+    <button class="operacao" onclick="calcular2b('+', 1)">+</button>
+    <span>=</span>
+    <input class="resultado" type="text" id="resultado_1" size="10" disabled placeholder="Resultado">
+    <button class="limpar" onclick="limpar2b(1)">Limpar</button>
+  </div>
+
+  <div class="linha">
+    <input type="text" id="x_2" size="3">
+    <input type="text" id="y_2" size="3">
+    <button class="operacao" onclick="calcular2b('-', 2)">-</button>
+    <span>=</span>
+    <input class="resultado" type="text" id="resultado_2" size="10" disabled placeholder="Resultado">
+    <button class="limpar" onclick="limpar2b(2)">Limpar</button>
+  </div>
+
+  <div class="linha">
+    <input type="text" id="x_3" size="3">
+    <input type="text" id="y_3" size="3">
+    <button class="operacao" onclick="calcular2b('*', 3)">*</button>
+    <span>=</span>
+    <input class="resultado" type="text" id="resultado_3" size="10" disabled placeholder="Resultado">
+    <button class="limpar" onclick="limpar2b(3)">Limpar</button>
+  </div>
+
+  <div class="linha">
+    <input type="text" id="x_4" size="3">
+    <input type="text" id="y_4" size="3">
+    <button class="operacao" onclick="calcular2b('/', 4)">/</button>
+    <span>=</span>
+    <input class="resultado" type="text" id="resultado_4" size="10" disabled placeholder="Resultado">
+    <button class="limpar" onclick="limpar2b(4)">Limpar</button>
+  </div>
+</div>
+
+<!-- Calculadora 3 -->
+<div class="c3">
+  <input type="text" id="display3" maxlength="12">
+  <div class="teclado">
+    <button class="numero" onclick="addChar3('7')">7</button>
+    <button class="numero" onclick="addChar3('8')">8</button>
+    <button class="numero" onclick="addChar3('9')">9</button>
+    <button class="operacao" onclick="addChar3('/')">/</button>
+
+    <button class="numero" onclick="addChar3('4')">4</button>
+    <button class="numero" onclick="addChar3('5')">5</button>
+    <button class="numero" onclick="addChar3('6')">6</button>
+    <button class="operacao" onclick="addChar3('*')">*</button>
+
+    <button class="numero" onclick="addChar3('1')">1</button>
+    <button class="numero" onclick="addChar3('2')">2</button>
+    <button class="numero" onclick="addChar3('3')">3</button>
+    <button class="operacao" onclick="addChar3('-')">-</button>
+
+    <button class="numero" onclick="addChar3('0')">0</button>
+    <button class="ca" onclick="clearDisplay3()">CA</button>
+    <button class="operacao" onclick="calculate3()">=</button>
+    <button class="operacao" onclick="addChar3('+')">+</button>
+  </div>
+</div>
+
+<script>
+  function calcular2b(operacao, linha) {
+    const x = parseFloat(document.getElementById('x_' + linha).value) || 0;
+    const y = parseFloat(document.getElementById('y_' + linha).value) || 0;
+    let resultado = 0;
+
+    switch (operacao) {
+      case '+': resultado = x + y; break;
+      case '-': resultado = x - y; break;
+      case '*': resultado = x * y; break;
+      case '/': resultado = y !== 0 ? x / y : 'Erro'; break;
+    }
+
+    document.getElementById('resultado_' + linha).value = resultado;
+  }
+
+  function limpar2b(linha) {
+    document.getElementById('x_' + linha).value = '';
+    document.getElementById('y_' + linha).value = '';
+    document.getElementById('resultado_' + linha).value = '';
+  }
+
+  const display3 = document.getElementById("display3");
+
+  function addChar3(char) {
+    if (display3.value.length < 12) {
+      display3.value += char;
+    }
+  }
+
+  function clearDisplay3() {
+    display3.value = "";
+  }
+
+  function calculate3() {
+    try {
+      const resultado = eval(display3.value);
+      display3.value = resultado;
+    } catch {
+      display3.value = "Erro";
+    }
+  }
+</script>
+
+</body>
+</html>
