@@ -1,0 +1,44 @@
+from flask import Flask, request, jsonify, send_from_directory
+from ollama import chat
+from pydantic import BaseModel
+
+app = Flask(__name__, static_folder='static')
+
+class Country(BaseModel):
+    name: str
+    capital: str
+    languages: list[str]
+
+@app.route('/ask_text', methods=['POST'])
+def ask_country_text():
+    data = request.get_json()
+
+    if not data or 'message' not in data:
+        return jsonify({'error': 'Missing "message" field'}), 400
+
+    user_message = data['message']
+
+    # Chamar o modelo
+    response = chat(
+        messages=[{'role': 'user', 'content': user_message}],
+        model='gemma3:1b',
+        format=Country.model_json_schema(),
+    )
+
+    # Validar e converter para objeto Country
+    country = Country.model_validate_json(response.message.content)
+
+    # Retornar como JSON
+    return jsonify(country.model_dump())
+
+@app.route('/')
+def index():
+    return send_from_directory('static', 'index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# curl -X POST http://localhost:5000/ask \
+#      -H "Content-Type: application/json" \
+#      -d '{"message": "Tell me about Canada."}'
