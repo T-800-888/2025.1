@@ -1,0 +1,35 @@
+<!-- Deve ser posto em uma pasta static -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Consulta de País</title>
+</head>
+<body>
+  <h1>Consultar País</h1>
+
+  <input type="text" id="messageInput" placeholder="Digite o nome do país">
+  <button onclick="enviarPergunta()">Enviar</button>
+
+  <p id="resposta"></p>
+
+  <script>
+    async function enviarPergunta() {
+      const mensagem = document.getElementById("messageInput").value;
+  
+      const resposta = await fetch('/ask_text', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: mensagem })
+      });
+  
+      const data = await resposta.json();
+      document.getElementById("resposta").innerText =
+      data.name && data.capital && data.languages
+      ? `O país é ${data.name}, a capital é ${data.capital}, e os idiomas são: ${data.languages.join(', ')}.`
+      : data.error || "Erro ao obter resposta.";
+    }
+  </script>  
+</body>
+</html>
