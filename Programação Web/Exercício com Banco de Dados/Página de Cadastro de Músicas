@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale=1.0>
+        <title>Músicas Preferidas</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: darkred;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .quadroMusica {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: black;
+            padding: 20px;
+            border-radius: 20px;
+            width: 300px;
+        }
+        .quadroMusica form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .formulario {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .formulario input {
+            padding: 15px 20px;
+            border-radius: 4px;
+            width: 87%;
+            border: none;
+            outline: none;
+        }
+        button {
+            background: darkred;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: brown;
+        }
+        .quadroMusica h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 27px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quadroMusica">
+        <h2>Música Preferida</h2>
+        <form action="musicas.php" method="POST">
+            <div class="formulario"><input type="text" name="titulo" placeholder="Título" required></div>
+            <div class="formulario"><input type="number" step="0.01" name="duracao" placeholder="Duração em minutos" required></div>
+            <div class="formulario"><input type="text" name="compositor" placeholder="Compositor" required></div>
+            <div class="formulario"><input type="text" name="album" placeholder="Álbum" required></div>
+            <button type="submit">Salvar Música</button>
+        </form>
+    </div>
+</body>
+</html>
