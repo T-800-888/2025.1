@@ -1,0 +1,11 @@
+CREATE DATABASE musica_preferida;
+
+USE musica_preferida;
+
+CREATE TABLE musica (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100),
+    duracao FLOAT,
+    compositor VARCHAR(100),
+    album VARCHAR(100)
+);
