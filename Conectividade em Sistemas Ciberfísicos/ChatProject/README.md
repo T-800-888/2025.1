@@ -74,9 +74,9 @@ python3 client_udp.py
 
 ## 👥 Autores(as)
 
-Letícia Miniuk Rosa Pereira
-Rayssa Gaievicz Grafetti
-Victor Willian Rodrigues Bittencourt
+Letícia Miniuk Rosa Pereira,
+Rayssa Gaievicz Grafetti,
+Victor Willian Rodrigues Bittencourt.
 
 PUCPR - Ciência da Computação 
 Disciplina: Conectividade de Sistemas Ciberfísicos
